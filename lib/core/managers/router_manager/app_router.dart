@@ -1,5 +1,6 @@
 import 'package:plant_scope/features/app_web_view/app_web_view_page.dart';
 import 'package:plant_scope/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:plant_scope/features/payment/presentation/pages/paywall_page.dart';
 import '../../../app_export.dart';
 import '../../../features/diagnose/presentation/pages/diagnose_page.dart';
 import '../../../features/home/presentation/pages/home_page.dart';
@@ -18,6 +19,7 @@ class AppRouter {
   static const String profile = '/profile';
   static const String appWebView = '/appWebView';
   static const String onboarding = '/onboarding';
+  static const String paywall = '/paywall';
 
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
@@ -109,6 +111,12 @@ class AppRouter {
         name: 'onboarding',
         pageBuilder: (context, state) =>
             MaterialPage(key: state.pageKey, child: const OnboardingPage()),
+      ),
+      GoRoute(
+        path: paywall,
+        name: 'paywall',
+        pageBuilder: (context, state) =>
+            MaterialPage(key: state.pageKey, child: const PaywallPage()),
       ),
     ],
     errorBuilder: (context, state) =>

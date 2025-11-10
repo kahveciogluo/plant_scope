@@ -81,7 +81,7 @@ class OnboardingPage extends StatelessWidget {
                                 state.currentIndex.getOnboardingButtonText,
                             onTap: () {
                               if (cubit.isLastPage) {
-                                context.go(AppRouter.home);
+                                context.go(AppRouter.paywall);
                               } else {
                                 cubit.nextPage();
                               }

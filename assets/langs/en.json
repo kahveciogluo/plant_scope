@@ -35,5 +35,22 @@
             "terms_of_use": "Terms of Use",
             "privacy_policy": "Privacy Policy"
         }
+    },
+    "paywall": {
+        "title_1": "PlantApp ",
+        "title_2": "Premium",
+        "subtitle": "Access All Features",
+        "feature_unlimited_title": "Unlimited",
+        "feature_unlimited_subtitle": "Plant Identify",
+        "feature_faster_title": "Faster",
+        "feature_faster_subtitle": "Process",
+        "plan_1_month_title": "1 Month",
+        "plan_1_month_price": "\\$2.99/month, auto renewable",
+        "plan_1_year_title": "1 Year",
+        "plan_1_year_subtitle": "First 3 days free, then \\$529,99/year",
+        "plan_1_year_badge": "Save 50%",
+        "cta_button": "Try free for 3 days",
+        "disclaimer": "After the 3-day free trial period you'll be charged ₺274.99 per year unless you cancel before the trial expires. Yearly Subscription is Auto-Renewable",
+        "restore": "Restore"
     }
 }
