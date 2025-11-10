@@ -1,0 +1,18 @@
+{
+    "bottom_bar": {
+        "home": "Home",
+        "diagnose": "Diagnose",
+        "my_garden": "My Garden",
+        "profile": "Profile"
+    },
+    "home": {
+        "hello": "Hi, plant lover!",
+        "search_for_plants": "Search for plants"
+    },
+    "greetings": {
+        "good_morning": "Good Morning!🌅",
+        "good_afternoon": "Good Afternoon!☀️",
+        "good_evening": "Good Evening!🌇",
+        "good_night": "Good Night!🌙"
+    }
+}
