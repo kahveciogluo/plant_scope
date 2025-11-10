@@ -51,32 +51,36 @@ class HomePage extends StatelessWidget {
                             ),
                     ).bottomPadding(16),
 
-                    /// Category list
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.6,
-                      child: state.isLoadingCategories
-                          ? const CategoryListLoading()
-                          : state.categories.isEmpty
-                          ? const Center(child: Text('No categories available'))
-                          : GridView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                              ),
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    childAspectRatio: 1,
-                                    crossAxisSpacing: 16,
-                                    mainAxisSpacing: 16,
-                                  ),
-                              itemCount: state.categories.length,
-                              itemBuilder: (context, index) {
-                                final category = state.categories[index];
-                                return CategoryCard(category: category);
-                              },
+                    /// Category list - use GridView with shrinkWrap
+                    state.isLoadingCategories
+                        ? SizedBox(
+                            height: 400,
+                            child: const CategoryListLoading(),
+                          )
+                        : state.categories.isEmpty
+                        ? const SizedBox(
+                            height: 200,
+                            child: Center(
+                              child: Text('No categories available'),
                             ),
-                    ),
+                          )
+                        : GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 1,
+                                  crossAxisSpacing: 16,
+                                  mainAxisSpacing: 16,
+                                ),
+                            itemCount: state.categories.length,
+                            itemBuilder: (context, index) {
+                              final category = state.categories[index];
+                              return CategoryCard(category: category);
+                            },
+                          ).bottomPadding(200),
                   ],
                 ),
               ),
