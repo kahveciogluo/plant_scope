@@ -1,6 +1,6 @@
 import 'package:plant_scope/app_export.dart';
 import 'package:plant_scope/features/home/domain/entities/question_entity.dart';
-import 'package:plant_scope/features/shared/images/app_network_image.dart';
+import 'package:plant_scope/shared/images/app_network_image.dart';
 
 class QuestionCard extends StatelessWidget {
   final QuestionEntity question;
