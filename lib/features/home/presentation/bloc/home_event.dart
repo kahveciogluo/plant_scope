@@ -7,4 +7,20 @@ abstract class HomeEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class LoadQuestionsEvent extends HomeEvent {}
+class GetHomeDataEvent extends HomeEvent {}
+
+class QuestionsLoadedEvent extends HomeEvent {
+  final dynamic result;
+  const QuestionsLoadedEvent(this.result);
+
+  @override
+  List<Object?> get props => [result];
+}
+
+class CategoriesLoadedEvent extends HomeEvent {
+  final dynamic result;
+  const CategoriesLoadedEvent(this.result);
+
+  @override
+  List<Object?> get props => [result];
+}

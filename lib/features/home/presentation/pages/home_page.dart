@@ -1,5 +1,8 @@
+import 'package:plant_scope/features/home/presentation/widgets/category_card.dart';
+import 'package:plant_scope/features/home/presentation/widgets/category_list_loading.dart';
 import 'package:plant_scope/features/home/presentation/widgets/home_app_bar.dart';
 import 'package:plant_scope/features/home/presentation/widgets/question_card.dart';
+import 'package:plant_scope/features/home/presentation/widgets/question_list_loading.dart';
 import '../../../../app_export.dart';
 import '../bloc/home_bloc.dart';
 import '../bloc/home_event.dart';
@@ -11,56 +14,57 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ml<HomeBloc>()..add(LoadQuestionsEvent()),
+      create: (_) => ml<HomeBloc>()..add(GetHomeDataEvent()),
       child: Scaffold(
         appBar: const HomeAppBar(),
         body: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
-            if (state is HomeLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
+            return Column(
+              children: [
+                /// Question horizontal list
+                SizedBox(
+                  height: context.width * 0.7 * 0.6,
+                  child: state.isLoadingQuestions
+                      ? const QuestionListLoading()
+                      : state.questions.isEmpty
+                      ? const Center(child: Text('No questions available'))
+                      : ListView.separated(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.questions.length,
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(width: 10),
+                          itemBuilder: (context, index) {
+                            final question = state.questions[index];
+                            return QuestionCard(question: question);
+                          },
+                        ),
+                ).bottomPadding(16),
 
-            if (state is HomeError) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.error_outline,
-                      size: 64,
-                      color: Colors.red,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(state.message),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () =>
-                          context.read<HomeBloc>().add(LoadQuestionsEvent()),
-                      child: const Text('Retry'),
-                    ),
-                  ],
+                /// Category list
+                Expanded(
+                  child: state.isLoadingCategories
+                      ? const CategoryListLoading()
+                      : state.categories.isEmpty
+                      ? const Center(child: Text('No categories available'))
+                      : GridView.builder(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 1,
+                                crossAxisSpacing: 16,
+                                mainAxisSpacing: 16,
+                              ),
+                          itemCount: state.categories.length,
+                          itemBuilder: (context, index) {
+                            final category = state.categories[index];
+                            return CategoryCard(category: category);
+                          },
+                        ),
                 ),
-              );
-            }
-
-            if (state is QuestionList) {
-              return SizedBox(
-                /// Question Card yüksekliği
-                height: context.width * 0.7 * 0.6,
-                child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: state.questions.length,
-                  separatorBuilder: (context, index) => SizedBox(width: 10),
-                  itemBuilder: (context, index) {
-                    final question = state.questions[index];
-                    return QuestionCard(question: question);
-                  },
-                ),
-              );
-            }
-
-            return const SizedBox.shrink();
+              ],
+            );
           },
         ),
       ),

@@ -9,6 +9,8 @@ class AppNetworkImage extends StatelessWidget {
   final Widget? errorWidget;
   final BorderRadiusGeometry? borderRadiusGeometry;
   final BoxFit fit;
+  final Color? placeholderColor;
+  final BoxBorder? boxBorder;
 
   const AppNetworkImage({
     super.key,
@@ -20,6 +22,8 @@ class AppNetworkImage extends StatelessWidget {
     this.borderRadiusGeometry,
     this.errorWidget,
     this.fit = BoxFit.cover,
+    this.placeholderColor,
+    this.boxBorder,
   });
 
   @override
@@ -28,10 +32,11 @@ class AppNetworkImage extends StatelessWidget {
       width: width ?? context.width,
       height: height ?? context.height,
       decoration: BoxDecoration(
+        border: boxBorder,
         borderRadius:
             borderRadiusGeometry ??
             BorderRadius.all(Radius.circular(borderRadius)),
-        color: context.colors.primary.withAlpha(100),
+        color: placeholderColor ?? context.colors.primary.withAlpha(100),
       ),
       child: CachedNetworkImage(
         imageUrl: imageUrl,

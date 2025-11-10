@@ -26,7 +26,7 @@ class AppBottomBarItem extends StatelessWidget {
               height: 70,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: context.colors.primary.withAlpha(220),
+                color: context.colors.primary,
                 border: Border.all(color: context.colors.secondary, width: 4),
               ),
               child: Center(
