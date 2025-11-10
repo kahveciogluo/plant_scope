@@ -11,13 +11,13 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    _navigateToHome();
+    _navigateToOnboarding();
   }
 
-  Future<void> _navigateToHome() async {
+  Future<void> _navigateToOnboarding() async {
     await Future.delayed(const Duration(seconds: 2));
     if (mounted) {
-      context.go(AppRouter.home);
+      context.go(AppRouter.onboarding);
     }
   }
 

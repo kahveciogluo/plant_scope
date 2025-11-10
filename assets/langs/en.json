@@ -14,5 +14,26 @@
         "good_afternoon": "Good Afternoon!☀️",
         "good_evening": "Good Evening!🌇",
         "good_night": "Good Night!🌙"
+    },
+    "premium_banner": {
+        "title": "FREE Premium Available",
+        "subtitle": "Tap to upgrade your account!"
+    },
+    "onboarding": {
+        "ob1_title_1": "Welcome to ",
+        "ob1_title_2": "PlantApp",
+        "ob1_subtitle": "Identify more than 3000+ plants and 88% accuracy.",
+        "ob2_title_1": "Take a photo to ",
+        "ob2_title_2": "identify\n",
+        "ob2_title_3": "the plant!",
+        "ob3_title_1": "Get plant ",
+        "ob3_title_2": "care guides",
+        "continue_button": "Continue",
+        "get_started_button": "Get Started",
+        "agreement": {
+            "all_text": "By tapping next, you are agreeing to PlantID\n{terms_of_use} & {privacy_policy}.",
+            "terms_of_use": "Terms of Use",
+            "privacy_policy": "Privacy Policy"
+        }
     }
 }

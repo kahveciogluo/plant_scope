@@ -40,10 +40,10 @@ class AppTextTheme {
       height: 1.3,
     ),
     headlineSmall: TextStyle(
-      fontSize: 18,
-      fontWeight: FontWeight.w600,
+      fontSize: 28,
+      fontWeight: FontWeight.w400,
       color: AppColors.textPrimaryLight,
-      height: 1.3,
+      height: 1,
     ),
 
     // Title Styles
