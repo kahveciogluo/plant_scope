@@ -1,12 +1,4 @@
 import 'app_export.dart';
-import 'features/auth/data/datasources/auth_local_datasource.dart';
-import 'features/auth/data/datasources/auth_local_datasource_impl.dart';
-import 'features/auth/data/datasources/auth_remote_datasource.dart';
-import 'features/auth/data/datasources/auth_remote_datasource_impl.dart';
-import 'features/auth/data/repositories/auth_repository_impl.dart';
-import 'features/auth/domain/repositories/auth_repository.dart';
-import 'features/auth/domain/usecases/login_usecase.dart';
-import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/home/data/datasources/home_datasource.dart';
 import 'features/home/data/datasources/home_datasource_impl.dart';
 import 'features/home/data/repositories/home_repository_impl.dart';
@@ -44,7 +36,6 @@ Future<void> init() async {
   // Features
   _initMain();
   _initHome();
-  _initAuth();
 }
 
 void _initMain() {
@@ -67,26 +58,5 @@ void _initHome() {
   // DataSources
   ml.registerLazySingleton<HomeDataSource>(
     () => HomeDataSourceImpl(networkManager: ml()),
-  );
-}
-
-void _initAuth() {
-  // Bloc
-  ml.registerFactory(() => AuthBloc(loginUseCase: ml()));
-
-  // UseCases
-  ml.registerLazySingleton(() => LoginUseCase(ml()));
-
-  // Repository
-  ml.registerLazySingleton<AuthRepository>(
-    () => AuthRepositoryImpl(remoteDataSource: ml(), localDataSource: ml()),
-  );
-
-  // DataSources
-  ml.registerLazySingleton<AuthRemoteDataSource>(
-    () => AuthRemoteDataSourceImpl(networkManager: ml()),
-  );
-  ml.registerLazySingleton<AuthLocalDataSource>(
-    () => AuthLocalDataSourceImpl(ml()),
   );
 }

@@ -1,6 +1,5 @@
 import 'app_export.dart';
 import 'core/managers/global_overlay_manager/widgets/global_overlay_widget.dart';
-import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/main_view/presentation/cubit/main_cubit.dart';
 import 'injection_container.dart' as di;
 
@@ -26,10 +25,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider<AuthBloc>(create: (_) => di.ml<AuthBloc>()),
-        BlocProvider<MainCubit>(create: (_) => di.ml<MainCubit>()),
-      ],
+      providers: [BlocProvider<MainCubit>(create: (_) => di.ml<MainCubit>())],
       child: MaterialApp.router(
         title: AppConstants.appName,
         debugShowCheckedModeBanner: false,
