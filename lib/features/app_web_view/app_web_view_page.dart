@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:plant_scope/app_export.dart';
 import 'package:plant_scope/features/app_web_view/cubit/app_web_view_cubit.dart';
@@ -46,24 +48,37 @@ class AppWebViewPage extends StatelessWidget {
                             url: WebUri(state.url!),
                           ),
                           initialSettings: InAppWebViewSettings(
-                            useShouldOverrideUrlLoading: true,
                             mediaPlaybackRequiresUserGesture: false,
                             allowsInlineMediaPlayback: true,
                             javaScriptEnabled: true,
                             supportZoom: true,
                             useHybridComposition: true,
+                            transparentBackground: false,
+                            disallowOverScroll: false,
                           ),
+                          shouldOverrideUrlLoading:
+                              (controller, navigationAction) async {
+                                return NavigationActionPolicy.ALLOW;
+                              },
                           onWebViewCreated: (controller) {
+                            log('🌐 WebView created');
                             cubit.setWebViewController(controller);
                           },
                           onLoadStart: (controller, url) {
+                            log('🌐 Load start: $url');
                             cubit.onLoadStart();
                           },
                           onLoadStop: (controller, url) {
+                            log('🌐 Load stop: $url');
                             cubit.onLoadStop();
                           },
                           onProgressChanged: (controller, progress) {
+                            log('🌐 Progress: $progress%');
                             cubit.onProgressChanged(progress);
+                          },
+                          onReceivedError: (controller, request, error) {
+                            log('🌐 Load error: $error');
+                            cubit.onLoadStop();
                           },
                         ),
                       ),
