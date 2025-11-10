@@ -9,8 +9,21 @@ import '../bloc/home_bloc.dart';
 import '../bloc/home_event.dart';
 import '../bloc/home_state.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +36,18 @@ class HomePage extends StatelessWidget {
             return RefreshIndicator(
               onRefresh: () async {
                 context.read<HomeBloc>().add(GetHomeDataEvent());
-                await Future.delayed(const Duration(milliseconds: 300));
+                await Future.delayed(const Duration(milliseconds: 500));
+                // Scroll to top when refreshing
+                if (_scrollController.hasClients) {
+                  _scrollController.animateTo(
+                    0,
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.easeOut,
+                  );
+                }
               },
               child: SingleChildScrollView(
+                controller: _scrollController,
                 physics: const AlwaysScrollableScrollPhysics(),
                 child: Column(
                   children: [
