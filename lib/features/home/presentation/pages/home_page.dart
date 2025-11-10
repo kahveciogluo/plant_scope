@@ -1,6 +1,7 @@
 import 'package:plant_scope/features/home/presentation/widgets/category_card.dart';
 import 'package:plant_scope/features/home/presentation/widgets/category_list_loading.dart';
 import 'package:plant_scope/features/home/presentation/widgets/home_app_bar.dart';
+import 'package:plant_scope/features/home/presentation/widgets/premium_banner.dart';
 import 'package:plant_scope/features/home/presentation/widgets/question_card.dart';
 import 'package:plant_scope/features/home/presentation/widgets/question_list_loading.dart';
 import '../../../../app_export.dart';
@@ -22,13 +23,17 @@ class HomePage extends StatelessWidget {
             return RefreshIndicator(
               onRefresh: () async {
                 context.read<HomeBloc>().add(GetHomeDataEvent());
-                // Wait a bit for the refresh to start
                 await Future.delayed(const Duration(milliseconds: 300));
               },
               child: SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 child: Column(
                   children: [
+                    /// Premium Banner
+                    const PremiumBanner()
+                        .horizontalPadding(20)
+                        .bottomPadding(24),
+
                     /// Question horizontal list
                     SizedBox(
                       height: context.width * 0.7 * 0.6,
