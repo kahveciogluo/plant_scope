@@ -148,3 +148,13 @@ This project is licensed under the MIT License.
 
 **Kahvecioğlu**
 - GitHub: [@kahveciogluo](https://github.com/kahveciogluo)
+
+---
+
+## 📱 Screenshots
+
+<p align="center">
+  <img src="screenshots/home_screen.png" width="250" alt="Home Screen"/>
+  <img src="screenshots/paywall_screen.png" width="250" alt="Paywall Screen"/>
+  <img src="screenshots/onboarding_screen.png" width="250" alt="Onboarding Screen"/>
+</p>
