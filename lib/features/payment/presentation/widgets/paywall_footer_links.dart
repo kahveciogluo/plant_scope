@@ -12,7 +12,7 @@ class PaywallFooterLinks extends StatelessWidget {
         TextButton(
           onPressed: () {
             context.pushNamed(
-              AppRouter.appWebView.replaceAll('/', ''),
+              AppRouter.appWebView.asPageName,
               queryParameters: {
                 'url': AppConstants.termsOfUseUrl,
                 'pageTitle': LocaleKeys.onboarding_agreement_terms_of_use.tr(),
@@ -34,7 +34,7 @@ class PaywallFooterLinks extends StatelessWidget {
         TextButton(
           onPressed: () {
             context.pushNamed(
-              AppRouter.appWebView.replaceAll('/', ''),
+              AppRouter.appWebView.asPageName,
               queryParameters: {
                 'url': AppConstants.privacyPolicyUrl,
                 'pageTitle': LocaleKeys.onboarding_agreement_privacy_policy

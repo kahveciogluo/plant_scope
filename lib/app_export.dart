@@ -6,7 +6,7 @@ export 'core/managers/network_manager/api_constants.dart';
 export 'core/managers/network_manager/endpoints.dart';
 export 'core/managers/network_manager/api_interceptor.dart';
 export 'core/managers/network_manager/network_manager.dart';
-export 'core/managers/user_manager.dart';
+export 'core/managers/user_manager/user_manager.dart';
 export 'core/managers/storage_manager/storage_manager.dart';
 export 'core/managers/storage_manager/storage_key.dart';
 export 'core/managers/locale_manager/locale_manager.dart';
@@ -26,7 +26,6 @@ export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';
 export 'package:get_it/get_it.dart';
 export 'package:go_router/go_router.dart';
-export 'package:flutter_secure_storage/flutter_secure_storage.dart';
 export 'package:easy_localization/easy_localization.dart' hide TextDirection;
 export 'package:equatable/equatable.dart';
 export 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -40,13 +39,14 @@ export 'package:flutter/services.dart';
 export 'package:logger/logger.dart';
 
 // DI
-export 'package:plant_scope/injection_container.dart';
+export 'injection_container.dart';
 
 // Extensions
-export 'package:plant_scope/core/extensions/context_extension.dart';
-export 'package:plant_scope/core/extensions/padding_extension.dart';
-export 'package:plant_scope/core/extensions/date_time_extension.dart';
+export 'core/extensions/context_extension.dart';
+export 'core/extensions/padding_extension.dart';
+export 'core/extensions/date_time_extension.dart';
+export 'core/managers/router_manager/router_extension.dart';
 
 // Generated Assets
-export 'package:plant_scope/core/gen/assets.gen.dart';
-export 'package:plant_scope/core/managers/locale_manager/locale_keys.g.dart';
+export 'core/gen/assets.gen.dart';
+export 'core/managers/locale_manager/locale_keys.g.dart';

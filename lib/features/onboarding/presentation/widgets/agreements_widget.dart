@@ -45,7 +45,7 @@ List<TextSpan> _buildText(BuildContext context) {
             ),
             recognizer: (TapGestureRecognizer()
               ..onTap = () => context.pushNamed(
-                AppRouter.appWebView.replaceAll('/', ''),
+                AppRouter.appWebView.asPageName,
                 queryParameters: {
                   'url': AppConstants.termsOfUseUrl,
                   'pageTitle': termsOfUse,
@@ -62,7 +62,7 @@ List<TextSpan> _buildText(BuildContext context) {
             ),
             recognizer: (TapGestureRecognizer()
               ..onTap = () => context.pushNamed(
-                AppRouter.appWebView.replaceAll('/', ''),
+                AppRouter.appWebView.asPageName,
                 queryParameters: {
                   'url': AppConstants.privacyPolicyUrl,
                   'pageTitle': privacyPolicy,

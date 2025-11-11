@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:plant_scope/app_export.dart';
 import 'package:plant_scope/features/app_web_view/cubit/app_web_view_cubit.dart';

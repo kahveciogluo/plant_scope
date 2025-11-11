@@ -26,8 +26,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) async {
     emit(state.copyWith(isLoadingQuestions: true, isLoadingCategories: true));
-
-    // Trigger both API calls and add events when they complete
     getQuestionsUseCase().then((result) => add(QuestionsLoadedEvent(result)));
     getCategoriesUsecase().then((result) => add(CategoriesLoadedEvent(result)));
   }

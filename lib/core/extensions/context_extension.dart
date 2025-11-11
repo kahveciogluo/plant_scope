@@ -1,10 +1,7 @@
-import 'dart:io';
-
 import 'package:plant_scope/app_export.dart';
 
 extension ContextExtension on BuildContext {
-  double get kHomeIndicatorHeight =>
-      Platform.isAndroid ? 0 : MediaQuery.of(this).viewPadding.bottom;
+  double get kHomeIndicatorHeight => MediaQuery.of(this).viewPadding.bottom;
 
   double get kKeyboardHeight => MediaQuery.of(this).viewInsets.bottom;
 

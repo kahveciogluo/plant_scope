@@ -1,31 +1,24 @@
+import '../cubit/splash_cubit.dart';
 import '../../../../app_export.dart';
 
-class SplashPage extends StatefulWidget {
+class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
 
   @override
-  State<SplashPage> createState() => _SplashPageState();
-}
-
-class _SplashPageState extends State<SplashPage> {
-  @override
-  void initState() {
-    super.initState();
-    _navigateToOnboarding();
-  }
-
-  Future<void> _navigateToOnboarding() async {
-    await Future.delayed(const Duration(seconds: 2));
-    if (mounted) {
-      context.go(AppRouter.onboarding);
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(child: Assets.images.plantScopeLogo.image(width: 150)),
+    return BlocProvider(
+      create: (_) => SplashCubit()..initialize(),
+      child: BlocListener<SplashCubit, SplashState>(
+        listener: (context, state) {
+          if (state is SplashNavigateToHome) {
+            context.go(AppRouter.home);
+          }
+        },
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: Center(child: Assets.images.plantScopeLogo.image(width: 150)),
+        ),
+      ),
     );
   }
 }

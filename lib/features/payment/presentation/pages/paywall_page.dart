@@ -34,7 +34,7 @@ class PaywallPage extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   automaticallyImplyLeading: false,
                   systemOverlayStyle: SystemUiOverlayStyle.light,
-                  flexibleSpace: PaywallAppBar(),
+                  flexibleSpace: PaywallAppBar(onClose: cubit.onClose),
                 ),
                 SliverToBoxAdapter(
                   child: Container(

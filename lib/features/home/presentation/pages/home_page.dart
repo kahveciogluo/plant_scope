@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                     ).bottomPadding(16),
 
-                    /// Category list - use GridView with shrinkWrap
+                    /// Category list
                     state.isLoadingCategories
                         ? SizedBox(
                             height: 400,

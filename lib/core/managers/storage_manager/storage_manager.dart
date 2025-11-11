@@ -1,23 +1,21 @@
-import '../../../app_export.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'storage_key.dart';
 
 class StorageManager {
   static final StorageManager _instance = StorageManager._internal();
   factory StorageManager() => _instance;
   StorageManager._internal();
 
-  final FlutterSecureStorage _storage = const FlutterSecureStorage(
-    aOptions: AndroidOptions(
-      encryptedSharedPreferences: true, // Api 23+ lar için
-      resetOnError: true,
-    ),
-    iOptions: IOSOptions(
-      accessibility: KeychainAccessibility.first_unlock_this_device,
-    ),
-  );
+  SharedPreferences? _prefs;
+
+  Future<void> _ensureInitialized() async {
+    _prefs ??= await SharedPreferences.getInstance();
+  }
 
   Future<void> write({required StorageKey key, required String value}) async {
     try {
-      await _storage.write(key: key.name, value: value);
+      await _ensureInitialized();
+      await _prefs!.setString(key.name, value);
     } catch (e) {
       throw StorageException('Failed to write to storage: $e');
     }
@@ -25,7 +23,8 @@ class StorageManager {
 
   Future<String?> read({required StorageKey key}) async {
     try {
-      return await _storage.read(key: key.name);
+      await _ensureInitialized();
+      return _prefs!.getString(key.name);
     } catch (e) {
       throw StorageException('Failed to read from storage: $e');
     }
@@ -33,7 +32,8 @@ class StorageManager {
 
   Future<void> delete({required StorageKey key}) async {
     try {
-      await _storage.delete(key: key.name);
+      await _ensureInitialized();
+      await _prefs!.remove(key.name);
     } catch (e) {
       throw StorageException('Failed to delete from storage: $e');
     }
@@ -41,7 +41,8 @@ class StorageManager {
 
   Future<void> clearAll() async {
     try {
-      await _storage.deleteAll();
+      await _ensureInitialized();
+      await _prefs!.clear();
     } catch (e) {
       throw StorageException('Failed to clear storage: $e');
     }
@@ -49,16 +50,22 @@ class StorageManager {
 
   Future<bool> containsKey({required StorageKey key}) async {
     try {
-      final value = await _storage.read(key: key.name);
-      return value != null;
+      await _ensureInitialized();
+      return _prefs!.containsKey(key.name);
     } catch (e) {
       return false;
     }
   }
 
-  Future<Map<String, String>> readAll() async {
+  Future<Map<String, dynamic>> readAll() async {
     try {
-      return await _storage.readAll();
+      await _ensureInitialized();
+      final keys = _prefs!.getKeys();
+      final Map<String, dynamic> result = {};
+      for (var key in keys) {
+        result[key] = _prefs!.get(key);
+      }
+      return result;
     } catch (e) {
       throw StorageException('Failed to read all from storage: $e');
     }

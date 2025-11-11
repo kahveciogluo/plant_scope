@@ -1,1 +1,1 @@
-enum StorageKey { deviceId, userToken, userData }
+enum StorageKey { deviceId, userToken, userOnboardingCompleted }

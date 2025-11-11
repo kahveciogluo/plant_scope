@@ -9,8 +9,10 @@ import '../../../features/my_garden/presentation/pages/my_garden_page.dart';
 import '../../../features/identify/presentation/pages/identify_page.dart';
 import '../../../features/profile/presentation/pages/profile_page.dart';
 import '../../../features/splash/presentation/pages/splash_page.dart';
+import 'app_redirecters.dart';
 
 class AppRouter {
+  /// Route paths
   static const String splash = '/';
   static const String home = '/home';
   static const String diagnose = '/diagnose';
@@ -22,8 +24,6 @@ class AppRouter {
   static const String paywall = '/paywall';
 
   static final GlobalKey<NavigatorState> navigatorKey =
-      GlobalKey<NavigatorState>();
-  static final GlobalKey<NavigatorState> shellNavigatorKey =
       GlobalKey<NavigatorState>();
 
   static final GoRouter router = GoRouter(
@@ -41,6 +41,7 @@ class AppRouter {
         builder: (context, state, navigationShell) {
           return MainView(navigationShell: navigationShell);
         },
+        redirect: AppRedirecters.onboardingRedirect,
         branches: [
           StatefulShellBranch(
             routes: [

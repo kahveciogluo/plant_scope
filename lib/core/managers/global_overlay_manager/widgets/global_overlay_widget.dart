@@ -1,8 +1,6 @@
 import 'package:plant_scope/app_export.dart';
 import 'package:plant_scope/core/managers/global_overlay_manager/widgets/popup_widget.dart';
 
-/// Global overlay widget that listens to GlobalOverlayManager
-/// Shows loading or popup overlays based on the manager's state
 class GlobalOverlayWidget extends StatelessWidget {
   const GlobalOverlayWidget({super.key});
 

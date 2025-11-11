@@ -44,6 +44,12 @@ class PaywallCubit extends Cubit<PaywallState> {
     emit(state.copyWith(selectedPlanIndex: index));
   }
 
+  void onClose() {
+    ml<UserManager>().setOnboardingCompleted(true);
+    final context = AppRouter.navigatorKey.currentContext;
+    context?.go(AppRouter.home);
+  }
+
   void subscribe() {}
 
   void restorePurchases() {}

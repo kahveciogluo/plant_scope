@@ -11,12 +11,12 @@ class QuestionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => context.pushNamed(
-        AppRouter.appWebView.replaceAll('/', ''),
+        AppRouter.appWebView.asPageName,
         queryParameters: {
           'url': question.uri ?? '',
           'pageTitle': question.title ?? '',
         },
-      ), // Navigate to WebView on tap),
+      ),
       child: Stack(
         alignment: Alignment.bottomLeft,
         children: [

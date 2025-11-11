@@ -58,7 +58,6 @@ class ApiInterceptor extends Interceptor {
 
     // Unauthorized - clear token and redirect to login
     if (err.response?.statusCode == 401) {
-      debugPrint('🔒 Unauthorized - Token expired or invalid');
       userManager.clear();
     }
 

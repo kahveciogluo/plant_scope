@@ -1,7 +1,9 @@
 import 'package:plant_scope/app_export.dart';
 
 class PaywallAppBar extends StatelessWidget {
-  const PaywallAppBar({super.key});
+  final VoidCallback? onClose;
+
+  const PaywallAppBar({super.key, this.onClose});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,6 @@ class PaywallAppBar extends StatelessWidget {
           ),
         ),
 
-        /// Gradient Overlay (resim ile container arası geçiş)
         Positioned.fill(
           child: Container(
             decoration: BoxDecoration(
@@ -28,7 +29,7 @@ class PaywallAppBar extends StatelessWidget {
                 colors: [
                   Colors.transparent,
                   Colors.transparent,
-                  context.colors.onSurface.withOpacity(0.3),
+                  context.colors.onSurface.withAlpha(77),
                   context.colors.onSurface,
                 ],
                 stops: const [0.0, 0.5, 0.85, 1.0],
@@ -44,7 +45,7 @@ class PaywallAppBar extends StatelessWidget {
           child: CircleAvatar(
             backgroundColor: Colors.black,
             child: IconButton(
-              onPressed: () => context.pop(),
+              onPressed: onClose,
               icon: Icon(Icons.close, color: context.colors.onPrimary),
             ),
           ),
