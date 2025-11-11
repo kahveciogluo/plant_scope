@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:plant_scope/core/errors/exceptions.dart';
+import 'package:plant_scope/core/managers/global_overlay_manager/global_overlay_manager.dart';
 import 'package:plant_scope/features/home/domain/entities/category_entity.dart';
 import 'package:plant_scope/features/home/domain/entities/question_entity.dart';
 import 'package:plant_scope/features/home/domain/usecases/get_categories_usecase.dart';
@@ -10,12 +11,26 @@ import 'package:plant_scope/features/home/domain/usecases/get_questions_usecase.
 import 'package:plant_scope/features/home/presentation/bloc/home_bloc.dart';
 import 'package:plant_scope/features/home/presentation/bloc/home_event.dart';
 import 'package:plant_scope/features/home/presentation/bloc/home_state.dart';
+import 'package:plant_scope/injection_container.dart' as di;
 
 class MockGetQuestionsUseCase extends Mock implements GetQuestionsUseCase {}
 
 class MockGetCategoriesUsecase extends Mock implements GetCategoriesUsecase {}
 
+class MockGlobalOverlayManager extends Mock implements GlobalOverlayManager {}
+
 void main() {
+  late MockGlobalOverlayManager mockOverlayManager;
+
+  setUpAll(() {
+    // Register mock GlobalOverlayManager
+    mockOverlayManager = MockGlobalOverlayManager();
+    di.ml.registerSingleton<GlobalOverlayManager>(mockOverlayManager);
+  });
+
+  tearDownAll(() {
+    di.ml.unregister<GlobalOverlayManager>();
+  });
   late HomeBloc homeBloc;
   late MockGetQuestionsUseCase mockGetQuestionsUseCase;
   late MockGetCategoriesUsecase mockGetCategoriesUsecase;
@@ -116,6 +131,20 @@ void main() {
         when(
           () => mockGetCategoriesUsecase.call(),
         ).thenAnswer((_) async => Right(mockCategories));
+        // Mock error popup call
+        when(
+          () => mockOverlayManager.openErrorPopup(
+            popupTitle: any(named: 'popupTitle'),
+            popupMessage: any(named: 'popupMessage'),
+            backgroundColor: any(named: 'backgroundColor'),
+            showIcon: any(named: 'showIcon'),
+            defaultAction: any(named: 'defaultAction'),
+            defaultActionText: any(named: 'defaultActionText'),
+            secondAction: any(named: 'secondAction'),
+            secondActionText: any(named: 'secondActionText'),
+            customIcon: any(named: 'customIcon'),
+          ),
+        ).thenReturn(null);
         return homeBloc;
       },
       act: (bloc) => bloc.add(GetHomeDataEvent()),
@@ -147,6 +176,15 @@ void main() {
               false,
             ),
       ],
+      verify: (_) {
+        // Verify error popup was shown
+        verify(
+          () => mockOverlayManager.openErrorPopup(
+            popupTitle: 'Error',
+            popupMessage: 'Failed to fetch questions',
+          ),
+        ).called(1);
+      },
     );
   });
 }

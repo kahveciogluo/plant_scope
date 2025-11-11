@@ -1,6 +1,4 @@
-import 'package:dartz/dartz.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/errors/exceptions.dart';
+import '../../../../app_export.dart';
 import '../../domain/entities/category_entity.dart';
 import '../../domain/entities/question_entity.dart';
 import '../../domain/usecases/get_categories_usecase.dart';
@@ -34,9 +32,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final result =
         event.result as Either<NetworkException, List<QuestionEntity>>;
     result.fold(
-      (failure) => emit(
-        state.copyWith(isLoadingQuestions: false, error: failure.message),
-      ),
+      (failure) {
+        ml<GlobalOverlayManager>().openErrorPopup(
+          popupTitle: 'Error',
+          popupMessage: failure.message,
+        );
+        emit(state.copyWith(isLoadingQuestions: false));
+      },
       (questions) =>
           emit(state.copyWith(questions: questions, isLoadingQuestions: false)),
     );
@@ -49,9 +51,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final result =
         event.result as Either<NetworkException, List<CategoryEntity>>;
     result.fold(
-      (failure) => emit(
-        state.copyWith(isLoadingCategories: false, error: failure.message),
-      ),
+      (failure) {
+        ml<GlobalOverlayManager>().openErrorPopup(
+          popupTitle: 'Error',
+          popupMessage: failure.message,
+        );
+        emit(state.copyWith(isLoadingCategories: false));
+      },
       (categories) => emit(
         state.copyWith(categories: categories, isLoadingCategories: false),
       ),
