@@ -45,7 +45,22 @@ cd plant_scope
 
 # Install dependencies
 flutter pub get
+```
 
+### ⚙️ Environment Setup 
+
+Create a `.env` file in the **project root directory**:
+
+```env
+BASE_URL=https://api.example.com
+API_KEY=your_api_key_here
+```
+
+> 📍 **Location**: Place `.env` file at `/plant_scope/.env` (same level as `pubspec.yaml`)
+
+### 🏃 Run the App
+
+```bash
 # Generate code (Freezed, JSON serialization)
 dart run build_runner build --delete-conflicting-outputs
 
